@@ -1,6 +1,10 @@
 # language: pt
 
 Funcionalidade: Fluxo Completo da API DemoQA BookStore
+  Como um usuário do sistema BookStore
+  Eu quero executar o fluxo completo de registro e aluguel de livros
+  Para validar que todas as operações da API funcionam corretamente
+
 
   #Principal scenario
   Cenário: Fluxo completo de registro de usuário e aluguel de livros

@@ -1,0 +1,15 @@
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\models\response\TokenResponse.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\models\response\CreateUserResponse.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\models\response\UserResponse.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\api\clients\BookStoreClient.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\utils\TestDataGenerator.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\models\request\GenerateTokenRequest.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\models\request\CreateUserRequest.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\models\response\BooksResponse.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\models\request\AddBooksRequest.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\api\endpoints\AccountEndpoints.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\runners\TestRunner.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\stepdefinitions\DemoQASteps.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\api\clients\AccountClient.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\api\endpoints\BookStoreEndpoints.java
+C:\Users\bpsan\bookstore-api-test-automation\src\test\java\com\accenture\demoqa\utils\Config.java

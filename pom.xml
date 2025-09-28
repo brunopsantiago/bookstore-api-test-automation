@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -10,14 +11,16 @@
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <restassured.version>5.3.0</restassured.version>
         <cucumber.version>7.13.0</cucumber.version>
         <testng.version>7.8.0</testng.version>
         <lombok.version>1.18.30</lombok.version>
         <jackson.version>2.15.2</jackson.version>
+        <maven.surefire.version>3.0.0-M9</maven.surefire.version>
+        <maven.compiler.version>3.11.0</maven.compiler.version>
     </properties>
 
     <dependencies>
@@ -116,10 +119,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>${maven.compiler.version}</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>21</source>
+                    <target>21</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
@@ -133,12 +136,29 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M9</version>
+                <version>${maven.surefire.version}</version>
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
                     <includes>
                         <include>**/TestRunner.java</include>
                     </includes>
+                    <systemPropertyVariables>
+                        <cucumber.junit-platform.naming-strategy>long</cucumber.junit-platform.naming-strategy>
+                    </systemPropertyVariables>
+                    <argLine>
+                        --add-opens java.base/java.lang=ALL-UNNAMED
+                        -Dfile.encoding=UTF-8
+                    </argLine>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin para executar Cucumber diretamente -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>io.cucumber.core.cli.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
