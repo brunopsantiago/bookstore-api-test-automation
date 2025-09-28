@@ -1,71 +1,121 @@
 package com.accenture.demoqa.api.clients;
 
-import com.accenture.demoqa.api.endpoints.AccountEndpoints;
 import com.accenture.demoqa.models.request.CreateUserRequest;
 import com.accenture.demoqa.models.request.GenerateTokenRequest;
 import com.accenture.demoqa.models.response.CreateUserResponse;
 import com.accenture.demoqa.models.response.TokenResponse;
 import com.accenture.demoqa.models.response.UserResponse;
-import com.accenture.demoqa.utils.Config;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
 public class AccountClient {
 
-    public CreateUserResponse createUser(CreateUserRequest userRequest) {
-        Response response = given()
-                .baseUri(Config.BASE_URL)
-                .contentType("application/json")
-                .body(userRequest)
-                .when()
-                .post(AccountEndpoints.CREATE_USER);
+    private static final String BASE_URL = "https://demoqa.com";
 
-        if (response.getStatusCode() == 201) {
-            return response.as(CreateUserResponse.class);
-        } else {
-            throw new RuntimeException("Falha ao criar usuário: " + response.getBody().asString());
-        }
+    public CreateUserResponse createUser(CreateUserRequest request) {
+        System.out.println("=== CRIANDO USUÁRIO NO CLIENT ===");
+        System.out.println("📤 REQUEST:");
+        System.out.println("URL: POST " + BASE_URL + "/Account/v1/User");
+        System.out.println("Headers: accept=application/json, Content-Type=application/json");
+        System.out.println("Body: " + request.toString());
+
+        Response response = given()
+                .baseUri(BASE_URL)
+                .header("Content-Type", "application/json")
+                .header("accept", "application/json")
+                .body(request)
+                .when()
+                .post("/Account/v1/User");
+
+        // LOG COMPLETO DA RESPOSTA
+        System.out.println("📥 RESPONSE:");
+        System.out.println("Status Code: " + response.getStatusCode());
+        System.out.println("Response Body: " + response.getBody().asString());
+        System.out.println("Headers: " + response.getHeaders());
+        System.out.println("=== FIM CRIAÇÃO DE USUÁRIO ===");
+
+        return response.as(CreateUserResponse.class);
     }
 
-    public TokenResponse generateToken(GenerateTokenRequest tokenRequest) {
+    public TokenResponse generateToken(GenerateTokenRequest request) {
+        System.out.println("=== GERANDO TOKEN NO CLIENT ===");
+        System.out.println("📤 REQUEST:");
+        System.out.println("URL: POST " + BASE_URL + "/Account/v1/GenerateToken");
+        System.out.println("Headers: accept=application/json, Content-Type=application/json");
+        System.out.println("Body: " + request.toString());
+
         Response response = given()
-                .baseUri(Config.BASE_URL)
-                .contentType("application/json")
-                .body(tokenRequest)
+                .baseUri(BASE_URL)
+                .header("Content-Type", "application/json")
+                .header("accept", "application/json")
+                .body(request)
                 .when()
-                .post(AccountEndpoints.GENERATE_TOKEN);
+                .post("/Account/v1/GenerateToken");
 
-        if (response.getStatusCode() == 200) {
-            return response.as(TokenResponse.class);
-        } else {
-            throw new RuntimeException("Falha ao gerar token: " + response.getBody().asString());
-        }
-    }
+        // LOG COMPLETO DA RESPOSTA
+        System.out.println("📥 RESPONSE:");
+        System.out.println("Status Code: " + response.getStatusCode());
+        System.out.println("Response Body: " + response.getBody().asString());
+        System.out.println("Headers: " + response.getHeaders());
+        System.out.println("=== FIM GERAÇÃO DE TOKEN ===");
 
-    public boolean isAuthorized(GenerateTokenRequest authRequest) {
-        Response response = given()
-                .baseUri(Config.BASE_URL)
-                .contentType("application/json")
-                .body(authRequest)
-                .when()
-                .post(AccountEndpoints.AUTHORIZED);
-
-        return response.getStatusCode() == 200 && response.getBody().as(Boolean.class);
+        return response.as(TokenResponse.class);
     }
 
     public UserResponse getUserDetails(String userId, String token) {
+        System.out.println("=== GET USER DETAILS ===");
+        System.out.println("📤 REQUEST:");
+        System.out.println("URL: GET " + BASE_URL + "/Account/v1/User/" + userId);
+        System.out.println("Headers: accept=application/json, Authorization=Bearer " + (token != null ? token.substring(0, Math.min(token.length(), 20)) + "..." : "null"));
+
         Response response = given()
-                .baseUri(Config.BASE_URL)
+                .baseUri(BASE_URL)
+                .header("accept", "application/json")
                 .header("Authorization", "Bearer " + token)
-                .pathParam("userId", userId)
+                .pathParam("UUID", userId)
                 .when()
-                .get(AccountEndpoints.USER_DETAILS);
+                .get("/Account/v1/User/{UUID}");
+
+        // LOG COMPLETO DA RESPOSTA
+        System.out.println("📥 RESPONSE:");
+        System.out.println("Status Code: " + response.getStatusCode());
+        System.out.println("Response Body: " + response.getBody().asString());
+        System.out.println("Headers: " + response.getHeaders());
+        System.out.println("=== FIM GET USER DETAILS ===");
 
         if (response.getStatusCode() == 200) {
             return response.as(UserResponse.class);
         } else {
-            throw new RuntimeException("Falha ao obter detalhes do usuário: " + response.getBody().asString());
+            System.out.println("❌ ERRO: " + response.getBody().asString());
+            return null;
         }
+    }
+
+    public boolean isAuthorized(String userId, String token) {
+        System.out.println("=== VERIFICANDO AUTORIZAÇÃO ===");
+        System.out.println("📤 REQUEST:");
+        System.out.println("URL: GET " + BASE_URL + "/Account/v1/User/" + userId);
+        System.out.println("Headers: accept=application/json, Authorization=Bearer " + (token != null ? token.substring(0, Math.min(token.length(), 20)) + "..." : "null"));
+
+        Response response = given()
+                .baseUri(BASE_URL)
+                .header("accept", "application/json")
+                .header("Authorization", "Bearer " + token)
+                .pathParam("UUID", userId)
+                .when()
+                .get("/Account/v1/User/{UUID}");
+
+        // LOG COMPLETO DA RESPOSTA
+        System.out.println("📥 RESPONSE:");
+        System.out.println("Status Code: " + response.getStatusCode());
+        System.out.println("Response Body: " + response.getBody().asString());
+        System.out.println("Headers: " + response.getHeaders());
+
+        boolean isAuthorized = response.getStatusCode() == 200;
+        System.out.println("✅ Usuário autorizado: " + isAuthorized);
+        System.out.println("=== FIM VERIFICAÇÃO AUTORIZAÇÃO ===");
+
+        return isAuthorized;
     }
 }

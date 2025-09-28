@@ -8,10 +8,10 @@ import io.cucumber.testng.CucumberOptions;
         glue = "com.accenture.demoqa.stepdefinitions",
         plugin = {
                 "pretty",
-                "html:target/cucumber-reports.html",
-                "json:target/cucumber.json"
+                "html:target/cucumber-reports/cucumber-report.html",
+                "json:target/cucumber-reports/cucumber-report.json"
         },
         monochrome = true
 )
-public class TestRunner extends AbstractTestNGCucumberTests{
+public class TestRunner extends AbstractTestNGCucumberTests {
 }
