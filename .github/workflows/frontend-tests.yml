@@ -21,14 +21,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'  # ✅ NODE 20
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install  # ✅ USA INSTALL EM VEZ DE CI
+        run: npm install
 
       - name: Run Cypress tests
-        run: npx cypress run
+        run: npx cypress run --headless  # ✅ HEADLESS MODE
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
