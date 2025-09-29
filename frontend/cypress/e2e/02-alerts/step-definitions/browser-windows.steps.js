@@ -35,9 +35,8 @@ And('fecho a nova janela aberta', () => {
   // Voltar para a página de Browser Windows
   cy.visit('https://demoqa.com/browser-windows');
 
-  // Verificar que voltou para a página correta - usar seletores mais genéricos
+  // Verificar que voltou para a página correta
   cy.get('body').should('contain', 'Browser Windows');
 
-  // Alternativa: verificar a URL
   cy.url().should('include', 'browser-windows');
 });
