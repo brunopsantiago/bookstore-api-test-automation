@@ -93,7 +93,6 @@ And('preencho todo o formulário com valores aleatórios', () => {
 });
 
 And('faço upload de um arquivo .txt', () => {
-  // Já feito no passo anterior, podemos deixar vazio ou remover
   cy.log('Upload já realizado no passo anterior');
 });
 
@@ -107,7 +106,6 @@ Then('garanto que um popup foi aberto após o submit', () => {
 });
 
 And('fecho o popup', () => {
-  // Fechar via JavaScript direto - ignora qualquer overlay
   cy.window().then((win) => {
     const closeButton = win.document.querySelector('#closeLargeModal');
     if (closeButton) {
