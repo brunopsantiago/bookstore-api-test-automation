@@ -105,7 +105,6 @@ And('limpo a tabela se tiver mais de {int} registros', (limite) => {
 
     cy.log(`Registros existentes: ${registrosExistentes}, Limite: ${limite}`);
 
-    // Se tiver mais registros que o limite, limpar alguns
     if (registrosExistentes > limite) {
       const quantidadeDeletar = registrosExistentes - limite;
       cy.log(`Deletando ${quantidadeDeletar} registros para manter o limite...`);
