@@ -4,7 +4,7 @@
 
 ## 🎯 Visão Geral
 
-Este projeto contém duas suites de automação independentes:
+Este projeto contém duas suítes de automação independentes:
 
 ### 🔧 [Backend API Tests](./backend/README.md)
 - **Tecnologias:** Java, RestAssured, Cucumber, Maven
@@ -14,7 +14,7 @@ Este projeto contém duas suites de automação independentes:
 ### 🎨 [Frontend E2E Tests](./frontend/README.md)
 - **Tecnologias:** Cypress, JavaScript, Node.js
 - **Pipeline:** [`frontend-tests.yml`](.github/workflows/frontend-tests.yml)
-- **Status:** 🚧 **Em Desenvolvimento**
+- **Status:** ✅ **Implementado e Funcionando**
 
 ## 🚀 Execução Rápida
 
@@ -30,21 +30,27 @@ cd frontend
 npm install
 npx cypress open
 ```
-📊 Pipelines CI/CD
-🔧 API Tests: https://github.com/brunopsantiago/bookstore-api-test-automation/actions/workflows/api-tests.yml/badge.svg
+## 📊 Pipelines CI/CD
 
-🎨 Frontend Tests: https://github.com/brunopsantiago/bookstore-api-test-automation/actions/workflows/frontend-tests.yml/badge.svg
-
-📁 Estrutura do Projeto
-text
+- **🔧 API Tests**: [![API Tests](https://github.com/brunopsantiago/bookstore-api-test-automation/actions/workflows/api-tests.yml/badge.svg)](https://github.com/brunopsantiago/bookstore-api-test-automation/actions/workflows/api-tests.yml)
+- **🎨 Frontend Tests**: [![Frontend Tests](https://github.com/brunopsantiago/bookstore-api-test-automation/actions/workflows/frontend-tests.yml/badge.svg)](https://github.com/brunopsantiago/bookstore-api-test-automation/actions/workflows/frontend-tests.yml)
+## 📁 Estrutura do Projeto
+```text
 bookstore-api-test-automation/
 ├── 🔧 backend/          # Testes de API
 ├── 🎨 frontend/         # Testes E2E Cypress  
 ├── 📖 README.md         # Este arquivo
 └── .github/workflows/   # Pipelines CI/CD
-👨‍💻 Desenvolvimento
+```
+## 👨‍💻 Desenvolvimento
+### Cada módulo tem documentação específica:
+
+```markdown
+## 👨‍💻 Desenvolvimento
+
 Cada módulo tem documentação específica:
+- 📖 [Backend Documentation](./backend/README.md)
+- 📖 [Frontend Documentation](./frontend/README.md)
+```
 
-📖 Backend Documentation
 
-📖 Frontend Documentation
