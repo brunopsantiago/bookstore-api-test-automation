@@ -38,6 +38,6 @@ And('fecho a nova janela aberta', () => {
   // Verificar que voltou para a página correta - usar seletores mais genéricos
   cy.get('body').should('contain', 'Browser Windows');
 
-  // Alternativa: verificar a URL
+  // verificar a URL
   cy.url().should('include', 'browser-windows');
 });
