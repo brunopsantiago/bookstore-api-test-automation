@@ -1,0 +1,35 @@
+{
+  "name": "demoqa-frontend-tests",
+  "version": "1.0.0",
+  "description": "Testes frontend para DemoQA com Cypress e Cucumber",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:forms": "cypress run --spec \"cypress/e2e/01-forms/features/*.feature\"",
+    "test:forms-headed": "cypress run --spec \"cypress/e2e/01-forms/features/*.feature\" --headed",
+    "test:alerts": "cypress run --spec \"cypress/e2e/02-alerts/features/*.feature\"",
+    "test:alerts-headed": "cypress run --spec \"cypress/e2e/02-alerts/features/*.feature\" --headed",
+    "test:tables": "cypress run --spec \"cypress/e2e/03-elements/features/*.feature\"",
+    "test:tables-headed": "cypress run --spec \"cypress/e2e/03-elements/features/*.feature\" --headed",
+    "test:widgets": "cypress run --spec \"cypress/e2e/04-widgets/features/*.feature\"",
+    "test:widgets-headed": "cypress run --spec \"cypress/e2e/04-widgets/features/*.feature\" --headed",
+    "test:interactions": "cypress run --browser chrome --spec \"cypress/e2e/05-interactions/features/*.feature\"",
+    "test:sortable": "cypress run --browser chrome --spec \"cypress/e2e/05-interactions/features/sortable.feature\"",
+    "test:all": "cypress run --browser chrome --spec \"cypress/e2e/01-forms/features/*.feature,cypress/e2e/02-alerts/features/*.feature,cypress/e2e/03-elements/features/*.feature,cypress/e2e/04-widgets/features/*.feature,cypress/e2e/05-interactions/features/*.feature\"",
+    "test:all-headed": "cypress run --spec \"cypress/e2e/01-forms/features/*.feature,cypress/e2e/02-alerts/features/*.feature,cypress/e2e/03-elements/features/*.feature,cypress/e2e/04-widgets/features/*.feature\" --headed",
+    "test:sequential": "npm run test:forms && sleep 3 && npm run test:alerts && sleep 3 && npm run test:tables && sleep 3 && npm run test:widgets"
+  },
+  "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.3.1",
+    "cypress": "^15.3.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": false,
+    "stepDefinitions": "cypress/e2e/**/step-definitions/",
+    "cucumberFeatures": "cypress/e2e/**/features/"
+  }
+}
