@@ -73,18 +73,18 @@ When('espero ate 100%', () => {
 
 // Step: clico em Reset - CORRIGIDO
 Then('clico em Reset', () => {
-  // CORREÇÃO: Usando seletor mais específico e garantindo o clique
+  // Usando seletor mais específico e garantindo o clique
   cy.get('button#resetButton.mt-3.btn.btn-primary')
     .should('be.visible')
     .should('contain', 'Reset')
     .click({ force: true });
 
-  // CORREÇÃO: Aguarda a transição e verifica de forma mais flexível
+  // Aguarda a transição e verifica de forma mais flexível
   cy.get('#startStopButton', { timeout: 5000 })
     .should('be.visible')
     .should('contain', 'Start');
 
-  // CORREÇÃO: Verificação mais tolerante para o reset
+  // Verificação mais tolerante para o reset
   cy.get('#progressBar .progress-bar', { timeout: 5000 })
     .invoke('attr', 'aria-valuenow')
     .then((value) => {
