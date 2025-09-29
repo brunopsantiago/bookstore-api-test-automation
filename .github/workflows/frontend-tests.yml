@@ -4,12 +4,12 @@ on:
   push:
     branches: [main, develop]
     paths:
-      - 'frontend/**'                   # ✅ MUDOU: monitora pasta frontend
+      - 'frontend/**'
       - '.github/workflows/frontend-tests.yml'
   pull_request:
     branches: [main]
     paths:
-      - 'frontend/**'                   # ✅ MUDOU
+      - 'frontend/**'
 
 jobs:
   cypress-e2e:
@@ -28,12 +28,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd frontend                    # ✅ ADICIONAR: entrar na pasta frontend
+          cd frontend
           npm install
 
       - name: Run Cypress tests
         run: |
-          cd frontend                    # ✅ ADICIONAR: entrar na pasta frontend
+          cd frontend 
           npx cypress run --headless
 
       - name: Upload artifacts
@@ -42,6 +42,6 @@ jobs:
         with:
           name: cypress-results
           path: |
-            frontend/cypress/screenshots/    # ✅ ATUALIZAR: adicionar frontend/
-            frontend/cypress/videos/         # ✅ ATUALIZAR
+            frontend/cypress/screenshots/
+            frontend/cypress/videos/
           retention-days: 7
