@@ -4,10 +4,12 @@ on:
   push:
     branches: [main, develop]
     paths:
-      - 'cypress/**'
-      - 'package.json'
-      - 'cypress.config.js'
+      - 'frontend/**'
       - '.github/workflows/frontend-tests.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'frontend/**'
 
 jobs:
   cypress-e2e:
@@ -21,14 +23,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'  # ✅ NODE 20
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd frontend
+          npm install
 
       - name: Run Cypress tests
-        run: npx cypress run --headless  # ✅ HEADLESS MODE
+        run: |
+          cd frontend
+          npx cypress run --headless
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -36,6 +42,6 @@ jobs:
         with:
           name: cypress-results
           path: |
-            cypress/screenshots/
-            cypress/videos/
+            frontend/cypress/screenshots/
+            frontend/cypress/videos/
           retention-days: 7

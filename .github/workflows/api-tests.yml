@@ -3,8 +3,13 @@ name: API Tests
 on:
   push:
     branches: [ main, develop ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/api-tests.yml'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'backend/**'
 
 jobs:
   api-tests:
@@ -24,6 +29,7 @@ jobs:
 
       - name: 🔧 Build and Test
         run: |
+          cd backend
           mvn clean compile test --no-transfer-progress
 
       - name: 📊 Upload Test Reports
@@ -32,8 +38,8 @@ jobs:
         with:
           name: test-reports
           path: |
-            target/surefire-reports/
-            target/cucumber-reports/
+            backend/target/surefire-reports/
+            backend/target/cucumber-reports/
           retention-days: 7
 
       - name: ✅ Test Summary
