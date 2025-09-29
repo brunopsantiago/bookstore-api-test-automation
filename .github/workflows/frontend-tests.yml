@@ -2,18 +2,14 @@ name: Frontend E2E Tests
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
     paths:
-      - 'cypress/**'
-      - 'package.json'
-      - 'cypress.config.js'
+      - 'frontend/**'                   # ✅ MUDOU: monitora pasta frontend
       - '.github/workflows/frontend-tests.yml'
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'cypress/**'
-      - 'package.json'
-      - 'cypress.config.js'
+      - 'frontend/**'                   # ✅ MUDOU
 
 jobs:
   cypress-e2e:
@@ -27,27 +23,25 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd frontend                    # ✅ ADICIONAR: entrar na pasta frontend
+          npm install
 
       - name: Run Cypress tests
-        run: npx cypress run
+        run: |
+          cd frontend                    # ✅ ADICIONAR: entrar na pasta frontend
+          npx cypress run --headless
 
-      - name: Upload screenshots
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-          retention-days: 7
-
-      - name: Upload videos
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: cypress-videos
-          path: cypress/videos
+          name: cypress-results
+          path: |
+            frontend/cypress/screenshots/    # ✅ ATUALIZAR: adicionar frontend/
+            frontend/cypress/videos/         # ✅ ATUALIZAR
           retention-days: 7

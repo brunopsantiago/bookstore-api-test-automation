@@ -1,46 +1,47 @@
-name: API Tests
+name: Frontend E2E Tests
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
+    paths:
+      - 'frontend/**'                   # ✅ MUDOU: monitora pasta frontend
+      - '.github/workflows/frontend-tests.yml'
   pull_request:
-    branches: [ main ]
+    branches: [main]
+    paths:
+      - 'frontend/**'                   # ✅ MUDOU
 
 jobs:
-  api-tests:
-    name: 🧪 Run API Tests
+  cypress-e2e:
+    name: Cypress E2E Tests
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: ☕ Set up JDK 21
-        uses: actions/setup-java@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: 'maven'
+          node-version: '20'
+          cache: 'npm'
 
-      - name: 🔧 Build and Test
+      - name: Install dependencies
         run: |
-          mvn clean compile test --no-transfer-progress
+          cd frontend                    # ✅ ADICIONAR: entrar na pasta frontend
+          npm install
 
-      - name: 📊 Upload Test Reports
+      - name: Run Cypress tests
+        run: |
+          cd frontend                    # ✅ ADICIONAR: entrar na pasta frontend
+          npx cypress run --headless
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-reports
+          name: cypress-results
           path: |
-            target/surefire-reports/
-            target/cucumber-reports/
+            frontend/cypress/screenshots/    # ✅ ATUALIZAR: adicionar frontend/
+            frontend/cypress/videos/         # ✅ ATUALIZAR
           retention-days: 7
-
-      - name: ✅ Test Summary
-        if: always()
-        run: |
-          echo "## 🎯 API Test Results" >> $GITHUB_STEP_SUMMARY
-          echo "### 📅 Execution: $(date)" >> $GITHUB_STEP_SUMMARY
-          echo "### ✅ Status: COMPLETED" >> $GITHUB_STEP_SUMMARY
-          echo "---" >> $GITHUB_STEP_SUMMARY
-          echo "📊 **Test reports available in Artifacts**" >> $GITHUB_STEP_SUMMARY

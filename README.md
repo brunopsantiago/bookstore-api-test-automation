@@ -1,91 +1,51 @@
-# 📚 BookStore API Test Automation
+# 📚 BookStore Test Automation
 
-<div align="center">
+**Framework completo de automação para API e Frontend**
 
-![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk)
-![RestAssured](https://img.shields.io/badge/RestAssured-5.3.0-blue?style=for-the-badge&logo=rest)
-![Cucumber](https://img.shields.io/badge/Cucumber-7.13.0-green?style=for-the-badge&logo=cucumber)
-![Maven](https://img.shields.io/badge/Maven-3.9.6-red?style=for-the-badge&logo=apache-maven)
-![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-✔-black?style=for-the-badge&logo=githubactions)
+## 🎯 Visão Geral
 
-**Framework de Automação de API para o DemoQA BookStore**  
-*Desenvolvido para o Desafio de Automação Accenture*
+Este projeto contém duas suites de automação independentes:
 
-[![API Tests](https://github.com/brunopsantiago/bookstore-api-test-automation/actions/workflows/api-tests.yml/badge.svg)](https://github.com/brunopsantiago/bookstore-api-test-automation/actions)
+### 🔧 [Backend API Tests](./backend/README.md)
+- **Tecnologias:** Java, RestAssured, Cucumber, Maven
+- **Pipeline:** [`api-tests.yml`](.github/workflows/api-tests.yml)
+- **Status:** ✅ **Implementado e Funcionando**
 
-</div>
+### 🎨 [Frontend E2E Tests](./frontend/README.md)
+- **Tecnologias:** Cypress, JavaScript, Node.js
+- **Pipeline:** [`frontend-tests.yml`](.github/workflows/frontend-tests.yml)
+- **Status:** 🚧 **Em Desenvolvimento**
 
-## 🚀 Status do Projeto
+## 🚀 Execução Rápida
 
-### ✅ **IMPLEMENTADO**
-- ✅ Fluxo completo de API (criação de usuário, autenticação, gestão de livros)
-- ✅ Framework com RestAssured + Cucumber + TestNG
-- ✅ CI/CD com GitHub Actions
-- ✅ Relatórios HTML e JSON do Cucumber
-- ✅ Logs detalhados de requests/responses
-- ✅ Validações de status code e schema JSON
-
-### 🚧 **EM DESENVOLVIMENTO**
-- ⏳ Testes de frontend com Cypress/Playwright
-- ⏳ Mais cenários de teste
-
-## 🏃‍♂️ Execução Rápida
-
+### Backend (API)
 ```bash
-# Clone e execute
-git clone https://github.com/brunopsantiago/bookstore-api-test-automation.git
-cd bookstore-api-test-automation
+cd backend
 mvn clean test
-
-# Com relatórios detalhados
-mvn clean test -Dcucumber.plugin="pretty,html:target/cucumber-reports/report.html"
 ```
 
-### 🛠️ Tecnologias
-| Tecnologia | Versão | Propósito |
-|------------|--------|-----------|
-| Java | 21 | Linguagem principal |
-| RestAssured | 5.3.0 | Cliente HTTP para APIs REST |
-| Cucumber | 7.13.0 | BDD e Gherkin |
-| TestNG | 7.8.0 | Framework de testes |
-| Maven | 3.9+ | Gerenciamento de dependências |
-| Lombok | 1.18.30 | Redução de boilerplate code |
-| Jackson | 2.15.2 | Serialização JSON |
-| GitHub Actions | - | CI/CD Pipeline |
-
-### 📊 Pipeline CI/CD
-- **Trigger:** Push para main/develop e Pull Requests
-- **Jobs:** Build → Test → Reports → Artifacts
-- **Relatórios:** Cucumber HTML + JSON disponíveis como artifacts
-
-### 🎯 Cenário Principal
+###  Frontend (UI)
+```bash
+cd frontend
+npm install
+npx cypress open
 ```
-Cenário: Fluxo completo de registro de usuário e aluguel de livros
-  Dado que eu crio um novo usuário com credenciais válidas
-  Quando eu gero um token de acesso para o usuário
-  Então o usuário deve estar autorizado
-  Quando eu recupero a lista de livros disponíveis
-  E eu adiciono dois livros aleatórios à coleção do usuário
-  Então os detalhes do usuário devem mostrar os livros selecionados
-  E a coleção deve conter exatamente 2 livros
-```
+📊 Pipelines CI/CD
+🔧 API Tests: https://github.com/brunopsantiago/bookstore-api-test-automation/actions/workflows/api-tests.yml/badge.svg
 
-### 🐛 Troubleshooting
-#### Erro de conexão
-👉 Verifique se https://demoqa.com está online
+🎨 Frontend Tests: https://github.com/brunopsantiago/bookstore-api-test-automation/actions/workflows/frontend-tests.yml/badge.svg
 
-#### Erro de dependência
-mvn clean install
+📁 Estrutura do Projeto
+text
+bookstore-api-test-automation/
+├── 🔧 backend/          # Testes de API
+├── 🎨 frontend/         # Testes E2E Cypress  
+├── 📖 README.md         # Este arquivo
+└── .github/workflows/   # Pipelines CI/CD
+👨‍💻 Desenvolvimento
+Cada módulo tem documentação específica:
 
-#### Erro de compilação
-👉 Verifique JDK 21 instalado
+📖 Backend Documentation
 
-### 📞 Contato
-#### **Bruno Santiago** - brunopsantiago - bpsantiagu@gmail.com
+📖 Frontend Documentation
 
-<div align="center">
-Desenvolvido para o Desafio de Automação Accenture
-
-⬆ Voltar ao topo
-
-</div> 
